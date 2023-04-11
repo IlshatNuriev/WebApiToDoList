@@ -17,7 +17,7 @@ namespace WebApiToDoList.Models
         public long Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required]
         [Display(Name = "Start date")]
@@ -31,7 +31,7 @@ namespace WebApiToDoList.Models
         [Display(Name = "Status")]
         public ProjectCurrentStatus ProjectCurrentStatus { get; set; }
         public int Priority { get; set; }
-        public ICollection<TaskItem> TaskItems { get; set; }
+        public ICollection<TaskItem>? TaskItems { get; set; }
 
 
     }
