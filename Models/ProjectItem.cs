@@ -31,7 +31,7 @@ namespace WebApiToDoList.Models
         [Display(Name = "Status")]
         public ProjectCurrentStatus ProjectCurrentStatus { get; set; }
         public int Priority { get; set; }
-        public ICollection<TaskItem>? TaskItems { get; set; }
+        public ICollection<TaskItem>? TaskItems { get; set; } = new List<TaskItem>();
 
 
     }
