@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApiToDoList.Models
 {
@@ -22,7 +23,10 @@ namespace WebApiToDoList.Models
 
         public int Priority { get; set; }
 
-        public long ProjectItemId { get; }
+        public long ProjectItemId { get; set; }
+
+   
+        public ProjectItem ProjectItem { get; set; }
 
 
     }

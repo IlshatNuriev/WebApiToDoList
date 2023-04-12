@@ -12,10 +12,15 @@ namespace WebApiToDoList.Data
         public WebApiToDoListContext (DbContextOptions<WebApiToDoListContext> options)
             : base(options)
         {
+
         }
 
-        public DbSet<ProjectItem> ProjectItem { get; set; } = default!;
+        public DbSet<ProjectItem> ProjectItems { get; set; }
 
-        public DbSet<WebApiToDoList.Models.TaskItem> TaskItem { get; set; } = default!;
+        public DbSet<TaskItem> TaskItems { get; set; } 
+
+        
+        
     }
+
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.ObjectModel;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using WebApiToDoList.Data;
 using WebApiToDoList.Models;
 
@@ -11,12 +13,12 @@ namespace WebApiToDoList.SeedData
             using (var context = new WebApiToDoListContext(
                 serviceProvider.GetRequiredService<DbContextOptions<WebApiToDoListContext>>()))
             {
-                if (context.ProjectItem.Any() && context.TaskItem.Any())
+                if (context.ProjectItems.Any())
                 {
                     return;
                 }
 
-                context.ProjectItem.AddRange(
+                context.ProjectItems.AddRange(
                     new ProjectItem
                     {
                         Name = "ProjectTest1",
@@ -24,23 +26,23 @@ namespace WebApiToDoList.SeedData
                         EndDate = DateTime.Parse("2-4-2023"),
                         ProjectCurrentStatus = ProjectCurrentStatus.Active,
                         Priority = 1,
-                        TaskItems = new List<TaskItem>
+                        TaskItems = new Collection<TaskItem>()             
                         {
-                            new TaskItem
+                            new TaskItem()
                             {
                                 Name = "ProjectTest1TaskTest1",
                                 TaskCurrentStatus = TaskCurrentStatus.ToDo,
                                 Description = "TaskTest1Description",
                                 Priority = 1
                             },
-                            new TaskItem
+                            new TaskItem()
                             {
                                 Name = "ProjectTest1TaskTest2",
                                 TaskCurrentStatus = TaskCurrentStatus.Done,
                                 Description = "TaskTest2Description",
                                 Priority = 2
                             },
-                            new TaskItem
+                            new TaskItem()
                             {
                                 Name = "ProjectTest1TaskTest3",
                                 TaskCurrentStatus = TaskCurrentStatus.InProgress,
@@ -56,31 +58,31 @@ namespace WebApiToDoList.SeedData
                         StartDate = DateTime.Parse("31-3-2023"),
                         EndDate = DateTime.Parse("2-4-2023"),
                         ProjectCurrentStatus = ProjectCurrentStatus.NotStarted,
-                        Priority = 1,
-                        TaskItems = new List<TaskItem>
+                        Priority = 2,
+                        TaskItems = new Collection<TaskItem>()
                         {
-                            new TaskItem
+                            new TaskItem()
                             {
                                 Name = "ProjectTest2TaskTest1",
                                 TaskCurrentStatus = TaskCurrentStatus.ToDo,
                                 Description = "TaskTest1Description",
                                 Priority = 1
                             },
-                            new TaskItem
+                            new TaskItem()
                             {
                                 Name = "ProjectTest2TaskTest2",
                                 TaskCurrentStatus = TaskCurrentStatus.Done,
                                 Description = "TaskTest2Description",
                                 Priority = 2
                             },
-                            new TaskItem
+                            new TaskItem()
                             {
                                 Name = "ProjectTest2TaskTest3",
                                 TaskCurrentStatus = TaskCurrentStatus.InProgress,
                                 Description = "TaskTest3Description",
                                 Priority = 3
                             }
-                        },
+                        }
                     },
                     new ProjectItem
                     {
@@ -88,24 +90,24 @@ namespace WebApiToDoList.SeedData
                         StartDate = DateTime.Parse("31-3-2023"),
                         EndDate = DateTime.Parse("2-4-2023"),
                         ProjectCurrentStatus = ProjectCurrentStatus.Completed,
-                        Priority = 1,
-                        TaskItems = new List<TaskItem>
+                        Priority = 3,
+                        TaskItems = new Collection<TaskItem>()
                         {
-                            new TaskItem
+                            new TaskItem()
                             {
                                 Name = "ProjectTest3TaskTest1",
                                 TaskCurrentStatus = TaskCurrentStatus.ToDo,
                                 Description = "TaskTest1Description",
                                 Priority = 1
                             },
-                            new TaskItem
+                            new TaskItem()
                             {
                                 Name = "ProjectTest3TaskTest2",
                                 TaskCurrentStatus = TaskCurrentStatus.Done,
                                 Description = "TaskTest2Description",
                                 Priority = 2
                             },
-                            new TaskItem
+                            new TaskItem()
                             {
                                 Name = "ProjectTest3TaskTest3",
                                 TaskCurrentStatus = TaskCurrentStatus.InProgress,
@@ -113,8 +115,8 @@ namespace WebApiToDoList.SeedData
                                 Priority = 3
                             }
                         },
-                    }
-                    ); 
+                    }) ;
+                context.SaveChanges();
             }
         }
     }

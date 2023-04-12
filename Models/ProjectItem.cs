@@ -1,5 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
+using Microsoft.VisualBasic;
 
 namespace WebApiToDoList.Models
 {
@@ -31,8 +34,9 @@ namespace WebApiToDoList.Models
         [Display(Name = "Status")]
         public ProjectCurrentStatus ProjectCurrentStatus { get; set; }
         public int Priority { get; set; }
-        public ICollection<TaskItem>? TaskItems { get; set; } = new List<TaskItem>();
+        public ICollection<TaskItem>? TaskItems { get; set; } = new Collection<TaskItem>();
 
+        public TaskItem? TaskItem { get; set; }
 
     }
 }

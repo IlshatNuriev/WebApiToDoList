@@ -25,22 +25,22 @@ namespace WebApiToDoList.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TaskItem>>> GetTaskItem()
         {
-          if (_context.TaskItem == null)
+          if (_context.TaskItems == null)
           {
               return NotFound();
           }
-            return await _context.TaskItem.ToListAsync();
+            return await _context.TaskItems.ToListAsync();
         }
 
         // GET: api/TaskItems/5
         [HttpGet("{id}")]
         public async Task<ActionResult<TaskItem>> GetTaskItem(long id)
         {
-          if (_context.TaskItem == null)
+          if (_context.TaskItems == null)
           {
               return NotFound();
           }
-            var taskItem = await _context.TaskItem.FindAsync(id);
+            var taskItem = await _context.TaskItems.FindAsync(id);
 
             if (taskItem == null)
             {
@@ -86,11 +86,11 @@ namespace WebApiToDoList.Controllers
         [HttpPost]
         public async Task<ActionResult<TaskItem>> PostTaskItem(TaskItem taskItem)
         {
-          if (_context.TaskItem == null)
+          if (_context.TaskItems == null)
           {
               return Problem("Entity set 'WebApiToDoListContext.TaskItem'  is null.");
           }
-            _context.TaskItem.Add(taskItem);
+            _context.TaskItems.Add(taskItem);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTaskItem", new { id = taskItem.Id }, taskItem);
@@ -100,17 +100,17 @@ namespace WebApiToDoList.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTaskItem(long id)
         {
-            if (_context.TaskItem == null)
+            if (_context.TaskItems == null)
             {
                 return NotFound();
             }
-            var taskItem = await _context.TaskItem.FindAsync(id);
+            var taskItem = await _context.TaskItems.FindAsync(id);
             if (taskItem == null)
             {
                 return NotFound();
             }
 
-            _context.TaskItem.Remove(taskItem);
+            _context.TaskItems.Remove(taskItem);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -118,7 +118,7 @@ namespace WebApiToDoList.Controllers
 
         private bool TaskItemExists(long id)
         {
-            return (_context.TaskItem?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.TaskItems?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
