@@ -21,30 +21,30 @@ namespace WebApiToDoList.SeedData
                 context.ProjectItems.AddRange(
                     new ProjectItem
                     {
-                        Name = "ProjectTest1",
-                        StartDate = DateTime.Parse("31-3-2023"),
-                        EndDate = DateTime.Parse("2-4-2023"),
+                        Name = "Create models",
+                        StartDate = DateTime.Parse("20-3-2023"),
+                        EndDate = DateTime.Parse("5-4-2023"),
                         ProjectCurrentStatus = ProjectCurrentStatus.Active,
                         Priority = 1,
                         TaskItems = new Collection<TaskItem>()             
                         {
                             new TaskItem()
                             {
-                                Name = "ProjectTest1TaskTest1",
+                                Name = "H",
                                 TaskCurrentStatus = TaskCurrentStatus.ToDo,
                                 Description = "TaskTest1Description",
                                 Priority = 1
                             },
                             new TaskItem()
                             {
-                                Name = "ProjectTest1TaskTest2",
+                                Name = "J",
                                 TaskCurrentStatus = TaskCurrentStatus.Done,
                                 Description = "TaskTest2Description",
                                 Priority = 2
                             },
                             new TaskItem()
                             {
-                                Name = "ProjectTest1TaskTest3",
+                                Name = "I",
                                 TaskCurrentStatus = TaskCurrentStatus.InProgress,
                                 Description = "TaskTest3Description",
                                 Priority = 3
@@ -54,30 +54,30 @@ namespace WebApiToDoList.SeedData
 
                     new ProjectItem
                     {
-                        Name = "ProjectTest2",
-                        StartDate = DateTime.Parse("31-3-2023"),
-                        EndDate = DateTime.Parse("2-4-2023"),
+                        Name = "Add controllers",
+                        StartDate = DateTime.Parse("16-4-2023"),
+                        EndDate = DateTime.Parse("2-5-2023"),
                         ProjectCurrentStatus = ProjectCurrentStatus.NotStarted,
                         Priority = 2,
                         TaskItems = new Collection<TaskItem>()
                         {
                             new TaskItem()
                             {
-                                Name = "ProjectTest2TaskTest1",
+                                Name = "D",
                                 TaskCurrentStatus = TaskCurrentStatus.ToDo,
                                 Description = "TaskTest1Description",
                                 Priority = 1
                             },
                             new TaskItem()
                             {
-                                Name = "ProjectTest2TaskTest2",
+                                Name = "G",
                                 TaskCurrentStatus = TaskCurrentStatus.Done,
                                 Description = "TaskTest2Description",
                                 Priority = 2
                             },
                             new TaskItem()
                             {
-                                Name = "ProjectTest2TaskTest3",
+                                Name = "F",
                                 TaskCurrentStatus = TaskCurrentStatus.InProgress,
                                 Description = "TaskTest3Description",
                                 Priority = 3
@@ -86,30 +86,30 @@ namespace WebApiToDoList.SeedData
                     },
                     new ProjectItem
                     {
-                        Name = "ProjectTest3",
-                        StartDate = DateTime.Parse("31-3-2023"),
-                        EndDate = DateTime.Parse("2-4-2023"),
+                        Name = "Services",
+                        StartDate = DateTime.Parse("15-5-2023"),
+                        EndDate = DateTime.Parse("20-5-2023"),
                         ProjectCurrentStatus = ProjectCurrentStatus.Completed,
                         Priority = 3,
                         TaskItems = new Collection<TaskItem>()
                         {
                             new TaskItem()
                             {
-                                Name = "ProjectTest3TaskTest1",
+                                Name = "A",
                                 TaskCurrentStatus = TaskCurrentStatus.ToDo,
                                 Description = "TaskTest1Description",
                                 Priority = 1
                             },
                             new TaskItem()
                             {
-                                Name = "ProjectTest3TaskTest2",
+                                Name = "C",
                                 TaskCurrentStatus = TaskCurrentStatus.Done,
                                 Description = "TaskTest2Description",
                                 Priority = 2
                             },
                             new TaskItem()
                             {
-                                Name = "ProjectTest3TaskTest3",
+                                Name = "B",
                                 TaskCurrentStatus = TaskCurrentStatus.InProgress,
                                 Description = "TaskTest3Description",
                                 Priority = 3

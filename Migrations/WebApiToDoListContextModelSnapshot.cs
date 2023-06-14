@@ -84,13 +84,11 @@ namespace WebApiToDoList.Migrations
 
             modelBuilder.Entity("WebApiToDoList.Models.TaskItem", b =>
                 {
-                    b.HasOne("WebApiToDoList.Models.ProjectItem", "ProjectItem")
+                    b.HasOne("WebApiToDoList.Models.ProjectItem", null)
                         .WithMany("TaskItems")
                         .HasForeignKey("ProjectItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ProjectItem");
                 });
 
             modelBuilder.Entity("WebApiToDoList.Models.ProjectItem", b =>

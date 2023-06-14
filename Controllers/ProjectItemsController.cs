@@ -5,9 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using WebApiToDoList.Data;
+using WebApiToDoList.Filters;
 using WebApiToDoList.Models;
+
 
 
 namespace WebApiToDoList.Controllers
@@ -17,119 +21,37 @@ namespace WebApiToDoList.Controllers
     public class ProjectItemsController : ControllerBase
     {
         private readonly WebApiToDoListContext _context;
+        private readonly ISortByNameOrStartDate _sortBy;
 
-        public ProjectItemsController(WebApiToDoListContext context)
+        public ProjectItemsController(WebApiToDoListContext context, ISortByNameOrStartDate sortBy)
         {
             _context = context;
+            _sortBy = sortBy;
         }
 
         // GET: api/ProjectItems
         [HttpGet]
-        public async Task<ActionResult<ICollection<ProjectItem>>> GetProjectItem()
+        public async Task<ActionResult<IEnumerable<ProjectItem>>> GetProjectItem(string? sortOrder)
         {
             if (_context.ProjectItems == null)
             {
                 return NotFound();
             }
 
-
-
-
-            //List<TaskItem> taskItems;
-            //List<ProjectItem> projectItems;
-
-            //var resultList = new ICollection<ProjectItem, TaskItem>();
-            //{
-            //    taskItems = _context.TaskItems.ToList();
-            //    projectItems = _context.ProjectItems.ToList();
-            //}
-
-
-
-
-
-            //var taskItems = await _context.TaskItems.ToListAsync();
-            //var projectItems = await _context.ProjectItems.ToListAsync();
-
-            //var viewModel = new ViewModel { ProjectItemsView = (ActionResult<IEnumerable<ProjectItem>>)projectItems, TaskItemsView = taskItems };
-
-
-
-
-
-            var projectItems = _context.ProjectItems.Join(_context.TaskItems,
-                p => p.Id,
-                t => t.ProjectItemId,
-                (p, t) => new ProjectItem()
-                {
-                    Name = p.Name,
-                    StartDate = p.StartDate,
-                    EndDate = p.EndDate,
-                    ProjectCurrentStatus = p.ProjectCurrentStatus,
-                    Priority = p.Priority,
-                    TaskItems = new Collection<TaskItem>() 
-                    { 
-                        new TaskItem 
-                        {
-                        Name = t.Name,
-                        TaskCurrentStatus = t.TaskCurrentStatus,
-                        Description = t.Description,
-                        Priority = t.Priority,
-                        ProjectItemId = p.Id
-                        }
-                    }
-                    
-                });
-
-            //var result = await (IEnumerable<ProjectItem>)projectItems.ToListAsync();
-
-            //var result = from projectitem in _context.ProjectItem
-            //             join taskitem in _context.TaskItem on projectitem.Id equals taskitem.ProjectItemId
-            //             select new
-            //             {
-            //                 Name = projectitem.Name,
-            //                 StartDate = projectitem.StartDate,
-            //                 EndDate = projectitem.EndDate,
-            //                 ProjectCurrentStatus = projectitem.ProjectCurrentStatus,
-            //                 Priority = projectitem.Priority,
-            //                 TaskItems = new
-            //                 {
-            //                     Name = taskitem.Name,
-            //                     TaskCurrentStatus = taskitem.TaskCurrentStatus,
-            //                     Description = taskitem.Description,
-            //                     Priority = taskitem.Priority,
-            //                     ProjectItemId = projectitem.Id
-            //                 }
-            //             };
-
-
-
-
-            return await projectItems.ToListAsync();//_context.ProjectItems.ToListAsync();
-
-            //var projectItem = new ProjectItem();
             
-            //var taskItem = new TaskItem();
+            try
+            {
+                var projectItems = await _context.ProjectItems.Include(t => t.TaskItems).ToListAsync();
+                
+                var result = _sortBy.SortProjectItems(projectItems, sortOrder);
 
-            //projectItem.TaskItems = taskItem.ProjectItemId
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
             
-            //var projectItems = await _context.ProjectItem.ToListAsync();
-
-            //projectItems.
-
-            //var taskItems = await _context.TaskItem.ToListAsync();
-
-
-            //var viewModel = new ViewModel { ProjectItems = projectItems, TaskItems = taskItems };
-
-
-            //return await taskItems.ToListAsync();
-
-            //return await _context.ProjectItem.ToListAsync();
-
-
-
-
 
         }
 

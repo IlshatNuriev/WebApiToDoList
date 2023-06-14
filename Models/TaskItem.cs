@@ -25,8 +25,6 @@ namespace WebApiToDoList.Models
 
         public long ProjectItemId { get; set; }
 
-   
-        public ProjectItem ProjectItem { get; set; }
 
 
     }

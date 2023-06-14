@@ -36,7 +36,6 @@ namespace WebApiToDoList.Models
         public int Priority { get; set; }
         public ICollection<TaskItem>? TaskItems { get; set; } = new Collection<TaskItem>();
 
-        public TaskItem? TaskItem { get; set; }
 
     }
 }

@@ -12,7 +12,7 @@ using WebApiToDoList.Data;
 namespace WebApiToDoList.Migrations
 {
     [DbContext(typeof(WebApiToDoListContext))]
-    [Migration("20230412100446_InitialCreate")]
+    [Migration("20230420144028_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -87,13 +87,11 @@ namespace WebApiToDoList.Migrations
 
             modelBuilder.Entity("WebApiToDoList.Models.TaskItem", b =>
                 {
-                    b.HasOne("WebApiToDoList.Models.ProjectItem", "ProjectItem")
+                    b.HasOne("WebApiToDoList.Models.ProjectItem", null)
                         .WithMany("TaskItems")
                         .HasForeignKey("ProjectItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ProjectItem");
                 });
 
             modelBuilder.Entity("WebApiToDoList.Models.ProjectItem", b =>
